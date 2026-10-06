@@ -1,0 +1,17 @@
+# Lando 3 no WSL2, com o engine do Docker Desktop (socket /var/run/docker.sock).
+# O PHP do Ubuntu (8.1) não atende o Drupal 11. Composer, Drush e o Apache
+# rodam no appserver (PHP 8.3). O código fica no filesystem do WSL (/home),
+# não em /mnt/c.
+name: drupal-enterprise-starter
+recipe: drupal11
+config:
+  webroot: web
+  php: '8.3'
+  via: apache:2.4
+  database: mysql:8.0
+  xdebug: false
+  composer_version: '2-latest'
+
+events:
+  post-start:
+    - appserver: composer install --no-interaction --prefer-dist
