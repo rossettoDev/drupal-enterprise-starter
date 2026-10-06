@@ -63,3 +63,30 @@
 /drush
 /drupal.phar
 /drupal
+
+# Keep custom code directories
+!/web/modules/custom
+!/web/themes/custom
+!/web/profiles/custom
+
+# Ignore backup files
+*.bak
+*.swp
+*~
+.DS_Store
+
+# Ignore environment-specific files
+.env
+.env.local
+
+# Ignore IDE files
+/.idea
+/.vscode
+*.sublime-project
+*.sublime-workspace
+
+# Ignore Drush backup directories
+backup_migrate/
+
+# Ignore recipes directory (Drupal 11)
+/recipes
