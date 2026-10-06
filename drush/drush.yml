@@ -1,0 +1,3 @@
+# URI padrão para comandos Drush neste ambiente Lando.
+options:
+  uri: 'https://drupal-enterprise-starter.lndo.site'

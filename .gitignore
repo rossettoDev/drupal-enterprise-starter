@@ -60,7 +60,7 @@
 /robo.phar
 /robo
 /drush.phar
-/drush
+/drush/Commands/contrib
 /drupal.phar
 /drupal
 
