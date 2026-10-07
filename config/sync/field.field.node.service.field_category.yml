@@ -1,0 +1,25 @@
+uuid: c1f6b19f-c458-49e8-a96b-9e4f0df980c1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_category
+    - node.type.service
+    - taxonomy.vocabulary.service_category
+id: node.service.field_category
+field_name: field_category
+entity_type: node
+bundle: service
+label: Categoria
+description: 'Categoria do serviço'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      service_category: service_category
+    auto_create: false
+field_type: entity_reference

@@ -1,0 +1,9 @@
+uuid: 16d74744-d18f-467f-af2d-0a82c6f43783
+langcode: en
+status: true
+dependencies: {  }
+name: 'Categoria de Serviço'
+vid: service_category
+description: 'Categorias para classificação de serviços'
+weight: 0
+new_revision: false
