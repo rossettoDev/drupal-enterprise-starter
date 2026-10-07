@@ -1,0 +1,14 @@
+{
+  "name": "starter-audit",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "audit": "node audit.mjs"
+  },
+  "dependencies": {
+    "@cursor/sdk": "^1.0.36"
+  }
+}
