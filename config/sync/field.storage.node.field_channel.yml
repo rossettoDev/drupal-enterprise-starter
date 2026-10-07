@@ -1,0 +1,36 @@
+uuid: 036c33c2-4db5-4a18-a1c4-c3bef9fbf89b
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_channel
+field_name: field_channel
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: web
+      label: Web
+    -
+      value: mobile
+      label: Mobile
+    -
+      value: presencial
+      label: Presencial
+    -
+      value: telefone
+      label: Telefone
+    -
+      value: email
+      label: E-mail
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

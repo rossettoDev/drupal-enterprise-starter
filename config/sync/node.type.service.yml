@@ -1,0 +1,11 @@
+uuid: 5bc2540c-c40c-47fb-a605-6b5082fe9b04
+langcode: en
+status: true
+dependencies: {  }
+name: Serviço
+type: service
+description: 'Tipo de conteúdo para cadastro de serviços no catálogo'
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: false
