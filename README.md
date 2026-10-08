@@ -18,7 +18,7 @@ O cliente Docker do WSL precisa enxergar o daemon do Docker Desktop (`/var/run/d
 lando start
 ```
 
-Na primeira execução o Lando baixa as imagens (PHP 8.3, Apache 2.4, MySQL 8.0) e roda `composer install`.
+Na primeira execução o Lando baixa as imagens (PHP 8.3, Apache 2.4, MariaDB 10.11) e roda `composer install`.
 
 - Site: https://drupal-enterprise-starter.lndo.site
 - Banco: host `database`, banco/usuário/senha `drupal11`
@@ -36,7 +36,7 @@ lando drush site:install standard \
   -y
 ```
 
-O `--db-url` é necessário na primeira instalação: o `settings.php` ainda não existe e o Drush, fora de um prompt interativo, não descobre o MySQL do Lando sozinho.
+O `--db-url` é necessário na primeira instalação: o `settings.php` ainda não existe e o Drush, fora de um prompt interativo, não descobre o MariaDB do Lando sozinho.
 
 ## Comandos
 
@@ -45,6 +45,6 @@ O `--db-url` é necessário na primeira instalação: o `settings.php` ainda nã
 | `lando composer <cmd>` | Composer no PHP 8.3 |
 | `lando drush <cmd>` | Drush do projeto |
 | `lando php -v` | PHP do container |
-| `lando mysql` | Cliente MySQL |
+| `lando mysql` | Cliente MariaDB |
 | `lando stop` | Para os containers |
 | `lando destroy -y` | Remove containers e o volume do banco |
