@@ -1,0 +1,7 @@
+name: 'Service Access Control'
+type: module
+description: 'Controla autoria e publicação de serviços'
+package: Custom
+core_version_requirement: ^11
+dependencies:
+  - drupal:node

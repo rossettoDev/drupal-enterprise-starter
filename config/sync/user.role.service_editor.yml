@@ -1,0 +1,22 @@
+uuid: 7e3f8a1c-9d2b-4e5f-a1c3-8d9e2f3a4b5c
+langcode: pt-br
+status: true
+dependencies:
+  config:
+    - node.type.service
+  module:
+    - node
+_core:
+  default_config_hash: null
+id: service_editor
+label: 'Editor de Serviços'
+weight: 3
+is_admin: false
+permissions:
+  - 'access content'
+  - 'access content overview'
+  - 'create service content'
+  - 'delete own service content'
+  - 'edit own service content'
+  - 'view own unpublished content'
+  - 'view the administration theme'
