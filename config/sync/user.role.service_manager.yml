@@ -1,0 +1,28 @@
+uuid: 8f4g9b2d-0e3c-5f6g-b2d4-9e0f4a5b6c7d
+langcode: pt-br
+status: true
+dependencies:
+  config:
+    - node.type.service
+  module:
+    - node
+_core:
+  default_config_hash: null
+id: service_manager
+label: 'Gestor de Serviços'
+weight: 4
+is_admin: false
+permissions:
+  - 'access content'
+  - 'access content overview'
+  - 'create service content'
+  - 'delete any service content'
+  - 'delete own service content'
+  - 'delete service revisions'
+  - 'edit any service content'
+  - 'edit own service content'
+  - 'revert service revisions'
+  - 'view all revisions'
+  - 'view own unpublished content'
+  - 'view service revisions'
+  - 'view the administration theme'

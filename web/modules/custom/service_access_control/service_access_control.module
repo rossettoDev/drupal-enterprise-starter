@@ -1,0 +1,140 @@
+<?php
+
+/**
+ * @file
+ * Controla autoria e publicação de serviços.
+ */
+
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\node\NodeInterface;
+
+/**
+ * Implements hook_node_access().
+ *
+ * Controla o acesso aos nós do tipo 'service'.
+ */
+function service_access_control_node_access(NodeInterface $node, $op, AccountInterface $account) {
+  // Aplica apenas para nós do tipo 'service'.
+  if ($node->bundle() !== 'service') {
+    return AccessResult::neutral();
+  }
+
+  // Administradores têm acesso total.
+  if ($account->hasPermission('administer nodes')) {
+    return AccessResult::neutral();
+  }
+
+  // Para operação de edição.
+  if ($op === 'update') {
+    $is_owner = $node->getOwnerId() === $account->id();
+    $is_editor = $account->hasRole('service_editor');
+    $is_manager = $account->hasRole('service_manager');
+
+    // service_editor só pode editar seus próprios serviços.
+    if ($is_editor && !$is_manager) {
+      if ($is_owner) {
+        return AccessResult::allowedIf($is_owner)
+          ->cachePerPermissions()
+          ->cachePerUser()
+          ->addCacheableDependency($node);
+      }
+      return AccessResult::forbidden('Editores só podem editar seus próprios serviços.')
+        ->cachePerPermissions()
+        ->cachePerUser()
+        ->addCacheableDependency($node);
+    }
+
+    // service_manager pode editar qualquer serviço.
+    if ($is_manager) {
+      return AccessResult::allowed()
+        ->cachePerPermissions()
+        ->cachePerUser();
+    }
+  }
+
+  return AccessResult::neutral();
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave() for node entities.
+ *
+ * Impede que service_editor publique serviços.
+ */
+function service_access_control_node_presave(EntityInterface $node) {
+  // Aplica apenas para nós do tipo 'service'.
+  if ($node->bundle() !== 'service') {
+    return;
+  }
+
+  $account = \Drupal::currentUser();
+
+  // Administradores podem fazer qualquer coisa.
+  if ($account->hasPermission('administer nodes')) {
+    return;
+  }
+
+  $is_editor = $account->hasRole('service_editor');
+  $is_manager = $account->hasRole('service_manager');
+
+  // Se o usuário é apenas editor (não gestor).
+  if ($is_editor && !$is_manager) {
+    // Se está tentando mudar o status de publicação.
+    if ($node->isNew()) {
+      // Novos serviços de editores sempre começam como rascunho.
+      $node->setUnpublished();
+    }
+    elseif (isset($node->original)) {
+      $original_status = $node->original->isPublished();
+      $new_status = $node->isPublished();
+
+      // Se está tentando mudar o status de publicação, reverte.
+      if ($original_status !== $new_status) {
+        if ($original_status) {
+          $node->setPublished();
+        }
+        else {
+          $node->setUnpublished();
+        }
+
+        \Drupal::messenger()->addWarning(
+          t('Você não tem permissão para alterar o status de publicação. Entre em contato com um gestor de serviços.')
+        );
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for node_service_form.
+ *
+ * Oculta o campo de publicação para service_editor.
+ */
+function service_access_control_form_node_service_form_alter(&$form, $form_state, $form_id) {
+  $account = \Drupal::currentUser();
+
+  // Administradores veem tudo.
+  if ($account->hasPermission('administer nodes')) {
+    return;
+  }
+
+  $is_editor = $account->hasRole('service_editor');
+  $is_manager = $account->hasRole('service_manager');
+
+  // service_editor não deve ver a opção de publicação.
+  if ($is_editor && !$is_manager) {
+    if (isset($form['status'])) {
+      $form['status']['#access'] = FALSE;
+    }
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for node_service_edit_form.
+ *
+ * Oculta o campo de publicação para service_editor.
+ */
+function service_access_control_form_node_service_edit_form_alter(&$form, $form_state, $form_id) {
+  service_access_control_form_node_service_form_alter($form, $form_state, $form_id);
+}
