@@ -1,0 +1,22 @@
+uuid: 11111111-1111-1111-1111-111111111111
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - enterprise_theme
+_core:
+  default_config_hash: erQSEZF2XUjNmgTl0uNRBzmg18ZGXwUcw2FhApoeuHk
+id: enterprise_theme_content
+theme: enterprise_theme
+region: content
+weight: 0
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Conteúdo principal'
+  label_display: '0'
+  provider: system
+visibility: {  }
