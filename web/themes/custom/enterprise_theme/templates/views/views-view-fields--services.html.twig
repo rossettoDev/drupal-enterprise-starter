@@ -4,24 +4,27 @@
  * Template para cada linha (row) da view services.
  */
 #}
-{% set service_title = row.content['#node'].title.value %}
-{% set service_url = path('entity.node.canonical', {'node': row.content['#node'].nid.value}) %}
-{% set service_summary = row.content['#node'].field_summary.value ?? '' %}
+{% if row.content['#row'] %}
+  {% set node = row.content['#row']._entity %}
+  {% set service_title = node.title.value %}
+  {% set service_url = path('entity.node.canonical', {'node': node.nid.value}) %}
+  {% set service_summary = node.field_summary.value|default('') %}
 
-{% if row.content['#node'].field_category.entity %}
-  {% set category = row.content['#node'].field_category.entity %}
-  {% set service_category = category.name.value %}
-  {% set service_category_url = path('entity.taxonomy_term.canonical', {'taxonomy_term': category.tid.value}) %}
-{% else %}
-  {% set service_category = '' %}
-  {% set service_category_url = '' %}
+  {% if node.field_category.entity %}
+    {% set category = node.field_category.entity %}
+    {% set service_category = category.name.value %}
+    {% set service_category_url = path('entity.taxonomy_term.canonical', {'taxonomy_term': category.tid.value}) %}
+  {% else %}
+    {% set service_category = '' %}
+    {% set service_category_url = '' %}
+  {% endif %}
+
+  {% include 'enterprise_theme:service-card' with {
+    'title': service_title,
+    'summary': service_summary,
+    'category': service_category,
+    'category_url': service_category_url,
+    'url': service_url,
+    'is_featured': false
+  } %}
 {% endif %}
-
-{% include 'enterprise_theme:service-card' with {
-  'title': service_title,
-  'summary': service_summary,
-  'category': service_category,
-  'category_url': service_category_url,
-  'url': service_url,
-  'is_featured': false
-} %}
