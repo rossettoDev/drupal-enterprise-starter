@@ -1,0 +1,38 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/11.x/core/modules/sdc/src/metadata.schema.json
+name: Cabeçalho de Seção
+status: stable
+description: Cabeçalho que marca o início de uma seção de conteúdo
+props:
+  type: object
+  required:
+    - title
+  properties:
+    title:
+      type: string
+      title: Título
+      description: Título da seção
+    subtitle:
+      type: string
+      title: Subtítulo
+      description: Texto complementar ou descrição da seção
+    level:
+      type: string
+      title: Nível do heading
+      description: Nível do heading (h1, h2, h3, etc)
+      default: 'h2'
+      enum:
+        - h1
+        - h2
+        - h3
+        - h4
+        - h5
+        - h6
+    align:
+      type: string
+      title: Alinhamento
+      description: Alinhamento do texto
+      default: 'left'
+      enum:
+        - left
+        - center
+        - right

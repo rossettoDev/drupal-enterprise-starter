@@ -1,0 +1,105 @@
+/* Tipografia base */
+html {
+  font-size: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-base);
+  color: var(--color-neutral-900);
+  background-color: var(--color-neutral-0);
+}
+
+/* Hierarquia de títulos */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  color: var(--color-primary-900);
+  margin-bottom: var(--space-md);
+}
+
+h1 {
+  font-size: var(--font-size-4xl);
+  margin-bottom: var(--space-xl);
+}
+
+h2 {
+  font-size: var(--font-size-3xl);
+  margin-bottom: var(--space-lg);
+}
+
+h3 {
+  font-size: var(--font-size-2xl);
+}
+
+h4 {
+  font-size: var(--font-size-xl);
+}
+
+h5 {
+  font-size: var(--font-size-lg);
+}
+
+h6 {
+  font-size: var(--font-size-base);
+}
+
+/* Responsividade de títulos */
+@media (max-width: 768px) {
+  h1 {
+    font-size: var(--font-size-3xl);
+  }
+
+  h2 {
+    font-size: var(--font-size-2xl);
+  }
+
+  h3 {
+    font-size: var(--font-size-xl);
+  }
+}
+
+/* Parágrafos e textos */
+p {
+  margin-bottom: var(--space-md);
+}
+
+a {
+  color: var(--color-primary-600);
+  text-decoration: underline;
+  transition: color var(--transition-base);
+}
+
+a:hover {
+  color: var(--color-primary-700);
+}
+
+a:focus {
+  outline: var(--color-focus-outline);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* Contraste adequado para acessibilidade */
+strong,
+b {
+  font-weight: var(--font-weight-bold);
+}
+
+em,
+i {
+  font-style: italic;
+}
+
+small {
+  font-size: var(--font-size-sm);
+}

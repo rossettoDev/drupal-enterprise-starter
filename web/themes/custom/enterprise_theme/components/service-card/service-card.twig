@@ -1,0 +1,41 @@
+<article class="service-card{{ is_featured ? ' service-card--featured' : '' }}" role="article" aria-labelledby="service-{{ title|clean_id }}">
+  <div class="service-card__content">
+    {% if is_featured %}
+      <span class="service-card__badge" aria-label="Serviço em destaque">
+        ⭐ Destaque
+      </span>
+    {% endif %}
+    
+    <h3 class="service-card__title" id="service-{{ title|clean_id }}">
+      <a href="{{ url }}" class="service-card__link">
+        {{ title }}
+      </a>
+    </h3>
+    
+    {% if category %}
+      <div class="service-card__meta">
+        {% if category_url %}
+          <a href="{{ category_url }}" class="service-card__category">
+            {{ category }}
+          </a>
+        {% else %}
+          <span class="service-card__category">
+            {{ category }}
+          </span>
+        {% endif %}
+      </div>
+    {% endif %}
+    
+    {% if summary %}
+      <p class="service-card__summary">
+        {{ summary }}
+      </p>
+    {% endif %}
+    
+    <div class="service-card__actions">
+      <a href="{{ url }}" class="service-card__cta" aria-label="Ver detalhes de {{ title }}">
+        Ver detalhes →
+      </a>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,102 @@
+{#
+/**
+ * @file
+ * Template da página inicial (home).
+ */
+#}
+<div class="home-page">
+  {# Hero Section #}
+  <section class="home-hero" aria-labelledby="home-hero-title">
+    <div class="home-hero__content">
+      {% include 'enterprise_theme:section-header' with {
+        'title': 'Portal de Serviços',
+        'subtitle': 'Acesse serviços públicos digitais de forma simples, rápida e acessível. Encontre o que você precisa em nosso catálogo.',
+        'level': 'h1',
+        'align': 'center'
+      } %}
+      
+      <div class="home-hero__actions">
+        <a href="/services" class="button button--primary button--large">
+          Ver todos os serviços
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {# Featured Services Section #}
+  {% if featured_services|length > 0 %}
+    <section class="home-featured" aria-labelledby="featured-title">
+      <div class="home-featured__content">
+        {% include 'enterprise_theme:section-header' with {
+          'title': 'Serviços em Destaque',
+          'subtitle': 'Serviços mais relevantes e acessados pelos cidadãos',
+          'level': 'h2',
+          'align': 'center'
+        } %}
+        
+        <div class="service-cards-grid">
+          {% for service in featured_services %}
+            {% include 'enterprise_theme:service-card' with {
+              'title': service.title,
+              'summary': service.summary,
+              'category': service.category,
+              'category_url': service.category_url,
+              'url': service.url,
+              'is_featured': true
+            } %}
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+  {% else %}
+    <section class="home-featured">
+      <div class="home-featured__content">
+        {% include 'enterprise_theme:empty-state' with {
+          'message': 'Nenhum serviço em destaque no momento',
+          'description': 'Em breve serão destacados os principais serviços disponíveis.',
+          'icon': '📭',
+          'action_text': 'Ver catálogo completo',
+          'action_url': '/services'
+        } %}
+      </div>
+    </section>
+  {% endif %}
+
+  {# About Section #}
+  <section class="home-about" aria-labelledby="about-title">
+    <div class="home-about__content">
+      {% include 'enterprise_theme:section-header' with {
+        'title': 'Sobre o Portal',
+        'subtitle': 'Plataforma digital que centraliza o acesso aos serviços públicos',
+        'level': 'h2',
+        'align': 'center'
+      } %}
+      
+      <div class="home-about__features">
+        <div class="feature-card">
+          <div class="feature-card__icon" aria-hidden="true">🔍</div>
+          <h3 class="feature-card__title">Encontre Facilmente</h3>
+          <p class="feature-card__text">Busque e filtre serviços por categoria ou palavra-chave</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-card__icon" aria-hidden="true">♿</div>
+          <h3 class="feature-card__title">Acessível</h3>
+          <p class="feature-card__text">Interface projetada para todos, com navegação por teclado e contraste adequado</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-card__icon" aria-hidden="true">📱</div>
+          <h3 class="feature-card__title">Responsivo</h3>
+          <p class="feature-card__text">Funciona perfeitamente em celulares, tablets e computadores</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% if messages %}
+    <div class="page__messages">
+      {{ messages }}
+    </div>
+  {% endif %}
+</div>

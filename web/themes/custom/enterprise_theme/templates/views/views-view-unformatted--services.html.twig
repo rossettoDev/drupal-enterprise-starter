@@ -1,0 +1,11 @@
+{#
+/**
+ * @file
+ * Template para exibir o conteúdo da view services (rows).
+ */
+#}
+<div class="service-cards-grid">
+  {% for row in rows %}
+    {{ row.content }}
+  {% endfor %}
+</div>

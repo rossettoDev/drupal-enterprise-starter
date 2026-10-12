@@ -1,0 +1,79 @@
+/* Cabeçalho de Seção */
+.section-header {
+  margin-bottom: var(--space-2xl);
+}
+
+.section-header--left {
+  text-align: left;
+}
+
+.section-header--center {
+  text-align: center;
+}
+
+.section-header--right {
+  text-align: right;
+}
+
+.section-header__title {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary-900);
+  margin: 0 0 var(--space-md) 0;
+  line-height: var(--line-height-tight);
+  position: relative;
+}
+
+.section-header--center .section-header__title::after,
+.section-header--left .section-header__title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background-color: var(--color-primary-600);
+  margin-top: var(--space-md);
+  border-radius: var(--radius-full);
+}
+
+.section-header--center .section-header__title::after {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section-header__subtitle {
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-relaxed);
+  color: var(--color-neutral-600);
+  margin: 0;
+  max-width: 700px;
+}
+
+.section-header--center .section-header__subtitle {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section-header--right .section-header__subtitle {
+  margin-left: auto;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .section-header {
+    margin-bottom: var(--space-xl);
+  }
+
+  .section-header__title {
+    font-size: var(--font-size-2xl);
+  }
+
+  .section-header__subtitle {
+    font-size: var(--font-size-base);
+  }
+}
+
+@media (max-width: 360px) {
+  .section-header__title {
+    font-size: var(--font-size-xl);
+  }
+}
