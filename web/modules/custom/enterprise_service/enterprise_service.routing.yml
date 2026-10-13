@@ -1,0 +1,7 @@
+enterprise_service.list:
+  path: '/api/v1/services'
+  defaults:
+    _controller: '\Drupal\enterprise_service\Controller\ServiceListController::list'
+  methods: [GET]
+  requirements:
+    _access: 'TRUE'
