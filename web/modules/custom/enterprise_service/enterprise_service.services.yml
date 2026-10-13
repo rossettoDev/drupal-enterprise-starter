@@ -1,0 +1,11 @@
+services:
+  logger.channel.enterprise_service:
+    parent: logger.channel_base
+    arguments: ['enterprise_service']
+
+  enterprise_service.query_service:
+    class: Drupal\enterprise_service\Service\ServiceQueryService
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.enterprise_service'
+      - '@current_user'

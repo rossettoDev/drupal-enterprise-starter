@@ -1,0 +1,8 @@
+name: 'Enterprise Service API'
+type: module
+description: 'API REST para consulta de serviços publicados'
+package: Custom
+core_version_requirement: ^11
+dependencies:
+  - drupal:node
+  - drupal:taxonomy
