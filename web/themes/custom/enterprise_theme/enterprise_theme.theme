@@ -1,0 +1,137 @@
+<?php
+
+/**
+ * @file
+ * Theme functions for enterprise_theme.
+ */
+
+use Drupal\node\Entity\Node;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_preprocess_page() for page--front.html.twig.
+ */
+function enterprise_theme_preprocess_page__front(&$variables) {
+  // Carrega os serviços em destaque para a home.
+  $featured_services = _enterprise_theme_get_featured_services();
+  $variables['featured_services'] = $featured_services;
+}
+
+/**
+ * Obtém os serviços em destaque.
+ *
+ * Regra de seleção:
+ * 1. Busca serviços publicados do tipo 'service'
+ * 2. Ordena por data de criação (mais recentes primeiro)
+ * 3. Limita a 6 serviços
+ *
+ * @return array
+ *   Array com dados dos serviços em destaque.
+ */
+function _enterprise_theme_get_featured_services() {
+  $featured_services = [];
+  
+  // Query para buscar serviços publicados.
+  $query = \Drupal::entityQuery('node')
+    ->accessCheck(TRUE)
+    ->condition('type', 'service')
+    ->condition('status', 1)
+    ->sort('created', 'DESC')
+    ->range(0, 6);
+  
+  $nids = $query->execute();
+  
+  if (empty($nids)) {
+    return $featured_services;
+  }
+  
+  $nodes = Node::loadMultiple($nids);
+  
+  foreach ($nodes as $node) {
+    $service = [];
+    
+    // Título.
+    $service['title'] = $node->getTitle();
+    
+    // URL do serviço.
+    $service['url'] = $node->toUrl()->toString();
+    
+    // Resumo.
+    if ($node->hasField('field_summary') && !$node->get('field_summary')->isEmpty()) {
+      $service['summary'] = $node->get('field_summary')->value;
+    }
+    
+    // Categoria.
+    if ($node->hasField('field_category') && !$node->get('field_category')->isEmpty()) {
+      $category = $node->get('field_category')->entity;
+      if ($category) {
+        $service['category'] = $category->getName();
+        $service['category_url'] = Url::fromRoute('entity.taxonomy_term.canonical', [
+          'taxonomy_term' => $category->id(),
+        ])->toString();
+      }
+    }
+    
+    $featured_services[] = $service;
+  }
+  
+  return $featured_services;
+}
+
+/**
+ * Implements hook_theme_suggestions_page_alter().
+ */
+function enterprise_theme_theme_suggestions_page_alter(array &$suggestions, array $variables) {
+  // Adiciona sugestão de template para a home.
+  if (\Drupal::service('path.matcher')->isFrontPage()) {
+    $suggestions[] = 'page__front';
+  }
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function enterprise_theme_preprocess_node(&$variables) {
+  $node = $variables['node'];
+  
+  // Adiciona classe para o tipo de conteúdo.
+  $variables['attributes']['class'][] = 'node--type-' . $node->bundle();
+  
+  // Adiciona classe para o modo de visualização.
+  $variables['attributes']['class'][] = 'node--view-mode-' . $variables['view_mode'];
+}
+
+/**
+ * Implements hook_preprocess_views_view().
+ */
+function enterprise_theme_preprocess_views_view(&$variables) {
+  $view = $variables['view'];
+  
+  // Adiciona classe para a view.
+  $variables['attributes']['class'][] = 'view-' . $view->id();
+  $variables['attributes']['class'][] = 'view-display-' . $view->current_display;
+}
+
+/**
+ * Implements hook_preprocess_menu().
+ */
+function enterprise_theme_preprocess_menu(&$variables) {
+  if ($variables['menu_name'] === 'main') {
+    $variables['attributes']['class'][] = 'site-navigation__menu';
+    
+    // Adiciona classes aos itens do menu.
+    foreach ($variables['items'] as &$item) {
+      $item['attributes']->addClass('site-navigation__item');
+      $item['url']->setOption('attributes', [
+        'class' => ['site-navigation__link'],
+      ]);
+      
+      // Marca item ativo.
+      if ($item['in_active_trail']) {
+        $item['url']->setOption('attributes', [
+          'class' => ['site-navigation__link', 'is-active'],
+        ]);
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+name: Enterprise Theme
+type: theme
+description: 'Tema institucional sóbrio e acessível para o portal de serviços'
+core_version_requirement: ^11
+base theme: false
+regions:
+  header: Cabeçalho
+  highlighted: Destacado
+  breadcrumb: Breadcrumb
+  content: Conteúdo
+  sidebar_first: Barra lateral
+  footer: Rodapé
+libraries:
+  - enterprise_theme/global
+  - enterprise_theme/components
+libraries-override:
+  system/base:
+    css:
+      component:
+        css/components/ajax-progress.module.css: false
+        css/components/align.module.css: false
+        css/components/autocomplete-loading.module.css: false
+        css/components/fieldgroup.module.css: false
+        css/components/container-inline.module.css: false
+  core/normalize:
+    css:
+      base:
+        assets/vendor/normalize-css/normalize.css: false

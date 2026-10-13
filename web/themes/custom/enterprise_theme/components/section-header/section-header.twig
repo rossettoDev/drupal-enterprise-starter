@@ -1,0 +1,14 @@
+{% set heading_level = level|default('h2') %}
+{% set alignment = align|default('left') %}
+
+<header class="section-header section-header--{{ alignment }}" role="banner" aria-labelledby="section-{{ title|clean_id }}">
+  <{{ heading_level }} class="section-header__title" id="section-{{ title|clean_id }}">
+    {{ title }}
+  </{{ heading_level }}>
+  
+  {% if subtitle %}
+    <p class="section-header__subtitle">
+      {{ subtitle }}
+    </p>
+  {% endif %}
+</header>

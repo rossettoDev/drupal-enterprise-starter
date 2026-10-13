@@ -1,0 +1,20 @@
+uuid: 55555555-5555-5555-5555-555555555555
+langcode: en
+status: true
+dependencies:
+  theme:
+    - enterprise_theme
+_core:
+  default_config_hash: fNNLN48MSGSuYkJVMfYY1trQ1UiRfso8KVdQyakChME
+id: enterprise_theme_page_title
+theme: enterprise_theme
+region: content
+weight: -10
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Título da página'
+  label_display: '0'
+  provider: core
+visibility: {  }

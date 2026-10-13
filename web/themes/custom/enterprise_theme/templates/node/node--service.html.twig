@@ -1,0 +1,51 @@
+{#
+/**
+ * @file
+ * Template para exibir o detalhe de um serviço.
+ */
+#}
+<article{{ attributes.addClass('node', 'node--service', 'node--full') }} role="article">
+  <div class="node__content">
+    <header class="node__header">
+      {% if not page %}
+        <h2{{ title_attributes.addClass('node__title') }}>
+          <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+        </h2>
+      {% else %}
+        <h1{{ title_attributes.addClass('node__title') }}>
+          {{ label }}
+        </h1>
+      {% endif %}
+      
+      {% if content.field_category|render %}
+        <div class="node__meta">
+          {{ content.field_category }}
+        </div>
+      {% endif %}
+    </header>
+
+    {% if content.field_summary|render %}
+      <div class="node__summary">
+        {{ content.field_summary }}
+      </div>
+    {% endif %}
+
+    {% if content.field_description|render %}
+      <div class="node__description">
+        {{ content.field_description }}
+      </div>
+    {% endif %}
+
+    {% if content.field_channel|render %}
+      <div class="node__field node__field--channel">
+        {{ content.field_channel }}
+      </div>
+    {% endif %}
+
+    {% if content.field_url|render %}
+      <div class="node__actions">
+        {{ content.field_url }}
+      </div>
+    {% endif %}
+  </div>
+</article>

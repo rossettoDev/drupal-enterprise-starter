@@ -1,0 +1,35 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/11.x/core/modules/sdc/src/metadata.schema.json
+name: Card de Serviço
+status: stable
+description: Card que apresenta informações resumidas de um serviço
+props:
+  type: object
+  required:
+    - title
+    - url
+  properties:
+    title:
+      type: string
+      title: Título
+      description: Título do serviço
+    summary:
+      type: string
+      title: Resumo
+      description: Resumo do serviço
+    category:
+      type: string
+      title: Categoria
+      description: Nome da categoria
+    category_url:
+      type: string
+      title: URL da categoria
+      description: Link para a categoria
+    url:
+      type: string
+      title: URL
+      description: Link para o detalhe do serviço
+    is_featured:
+      type: boolean
+      title: Destaque
+      description: Se é um serviço em destaque
+      default: false

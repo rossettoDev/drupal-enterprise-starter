@@ -1,0 +1,30 @@
+{#
+/**
+ * @file
+ * Template para cada linha (row) da view services.
+ */
+#}
+{% if row.content['#row'] %}
+  {% set node = row.content['#row']._entity %}
+  {% set service_title = node.title.value %}
+  {% set service_url = path('entity.node.canonical', {'node': node.nid.value}) %}
+  {% set service_summary = node.field_summary.value|default('') %}
+
+  {% if node.field_category.entity %}
+    {% set category = node.field_category.entity %}
+    {% set service_category = category.name.value %}
+    {% set service_category_url = path('entity.taxonomy_term.canonical', {'taxonomy_term': category.tid.value}) %}
+  {% else %}
+    {% set service_category = '' %}
+    {% set service_category_url = '' %}
+  {% endif %}
+
+  {% include 'enterprise_theme:service-card' with {
+    'title': service_title,
+    'summary': service_summary,
+    'category': service_category,
+    'category_url': service_category_url,
+    'url': service_url,
+    'is_featured': false
+  } %}
+{% endif %}

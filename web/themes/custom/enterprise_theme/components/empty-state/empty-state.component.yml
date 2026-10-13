@@ -1,0 +1,30 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/11.x/core/modules/sdc/src/metadata.schema.json
+name: Estado Vazio
+status: stable
+description: Mensagem exibida quando não há conteúdo a ser exibido
+props:
+  type: object
+  required:
+    - message
+  properties:
+    message:
+      type: string
+      title: Mensagem
+      description: Mensagem principal do estado vazio
+    description:
+      type: string
+      title: Descrição
+      description: Texto complementar com mais informações
+    icon:
+      type: string
+      title: Ícone
+      description: Emoji ou ícone a ser exibido
+      default: '📭'
+    action_text:
+      type: string
+      title: Texto da ação
+      description: Texto do botão/link de ação
+    action_url:
+      type: string
+      title: URL da ação
+      description: URL para onde o botão/link deve direcionar

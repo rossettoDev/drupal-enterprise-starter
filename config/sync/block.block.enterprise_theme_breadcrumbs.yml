@@ -1,0 +1,22 @@
+uuid: 44444444-4444-4444-4444-444444444444
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - enterprise_theme
+_core:
+  default_config_hash: 7R4NXwZFHz6kh2bMbST9N7zQAdx7wVgFTTRqqGRtRqQ
+id: enterprise_theme_breadcrumbs
+theme: enterprise_theme
+region: breadcrumb
+weight: 0
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumb
+  label_display: '0'
+  provider: system
+visibility: {  }

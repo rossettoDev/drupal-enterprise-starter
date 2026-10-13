@@ -1,0 +1,22 @@
+global:
+  version: 1.0.0
+  css:
+    base:
+      css/base/reset.css: {}
+      css/base/tokens.css: {}
+      css/base/typography.css: {}
+      css/base/layout.css: {}
+
+components:
+  version: 1.0.0
+  css:
+    component:
+      css/components/header.css: {}
+      css/components/footer.css: {}
+      css/components/navigation.css: {}
+      css/components/home.css: {}
+      css/components/views.css: {}
+      css/components/utilities.css: {}
+      components/service-card/service-card.css: {}
+      components/section-header/section-header.css: {}
+      components/empty-state/empty-state.css: {}

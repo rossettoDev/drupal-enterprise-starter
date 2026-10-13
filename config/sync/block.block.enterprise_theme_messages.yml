@@ -1,0 +1,22 @@
+uuid: 33333333-3333-3333-3333-333333333333
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - enterprise_theme
+_core:
+  default_config_hash: BZ5tpW7H8X4PVGRm3MImTIHd2tN0eF7zOtp4SpRYUA0
+id: enterprise_theme_messages
+theme: enterprise_theme
+region: highlighted
+weight: -5
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Mensagens de status'
+  label_display: '0'
+  provider: system
+visibility: {  }

@@ -1,0 +1,21 @@
+{#
+/**
+ * @file
+ * Template page padrão.
+ */
+#}
+<div class="page">
+  {% if title and not is_front %}
+    <div class="page__header">
+      <h1 class="page__title">{{ title }}</h1>
+    </div>
+  {% endif %}
+
+  {% if messages %}
+    <div class="page__messages">
+      {{ messages }}
+    </div>
+  {% endif %}
+
+  {{ page.content }}
+</div>

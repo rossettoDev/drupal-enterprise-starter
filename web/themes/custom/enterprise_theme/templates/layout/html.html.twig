@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html{{ html_attributes }}>
+  <head>
+    <head-placeholder token="{{ placeholder_token }}">
+    <title>{{ head_title|safe_join(' | ') }}</title>
+    <css-placeholder token="{{ placeholder_token }}">
+    <js-placeholder token="{{ placeholder_token }}">
+  </head>
+  <body{{ attributes.addClass('layout-container') }}>
+    <a href="#main-content" class="skip-to-content">
+      Pular para o conteúdo principal
+    </a>
+    
+    {{ page_top }}
+    
+    <div class="layout-content">
+      <header class="site-header" role="banner">
+        <div class="container site-header__container">
+          <div class="site-header__branding">
+            {% if site_logo %}
+              <a href="{{ front_page }}" title="{{ 'Página inicial'|t }}" rel="home" class="site-header__logo-link">
+                <img src="{{ site_logo }}" alt="{{ 'Página inicial'|t }}" class="site-header__logo" />
+              </a>
+            {% endif %}
+            
+            <div class="site-header__name">
+              <a href="{{ front_page }}" title="{{ 'Página inicial'|t }}" rel="home">
+                {{ site_name }}
+              </a>
+            </div>
+          </div>
+          
+          {% if page.header %}
+            <nav class="site-navigation" role="navigation" aria-label="{{ 'Menu principal'|t }}">
+              {{ page.header }}
+            </nav>
+          {% endif %}
+        </div>
+      </header>
+
+      {% if page.highlighted %}
+        <div class="highlighted">
+          <div class="container">
+            {{ page.highlighted }}
+          </div>
+        </div>
+      {% endif %}
+
+      {% if page.breadcrumb %}
+        <div class="breadcrumb">
+          <div class="container">
+            {{ page.breadcrumb }}
+          </div>
+        </div>
+      {% endif %}
+
+      <main role="main" id="main-content">
+        <div class="container">
+          {{ page.content }}
+        </div>
+      </main>
+
+      {% if page.sidebar_first %}
+        <aside class="sidebar sidebar--first" role="complementary">
+          <div class="container">
+            {{ page.sidebar_first }}
+          </div>
+        </aside>
+      {% endif %}
+
+      <footer class="site-footer" role="contentinfo">
+        <div class="container site-footer__content">
+          {% if page.footer %}
+            {{ page.footer }}
+          {% endif %}
+          
+          <div class="site-footer__info">
+            <p>&copy; {{ 'now'|date('Y') }} {{ site_name }}. Todos os direitos reservados.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    {{ page_bottom }}
+    <js-bottom-placeholder token="{{ placeholder_token }}">
+  </body>
+</html>
