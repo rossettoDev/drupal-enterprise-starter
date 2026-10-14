@@ -27,16 +27,35 @@ O domínio `*.lndo.site` aponta para `127.0.0.1`. Com o Docker Desktop, as porta
 
 ## Instalar o Drupal
 
+### Instalação Automatizada (Recomendado)
+
+O projeto usa configuração versionada. Execute o script de instalação:
+
 ```bash
-lando drush site:install standard \
-  --db-url=mysql://drupal11:drupal11@database:3306/drupal11 \
-  --account-name=admin \
-  --account-pass=admin \
-  --site-name="Drupal Enterprise Starter" \
-  -y
+./tools/install.sh
 ```
 
-O `--db-url` é necessário na primeira instalação: o `settings.php` ainda não existe e o Drush, fora de um prompt interativo, não descobre o MariaDB do Lando sozinho.
+Este script:
+- Valida o ambiente e dependências
+- Inicializa o Lando (se necessário)
+- Recria o banco de dados MariaDB
+- Instala o Drupal importando toda a configuração de `config/sync`
+- Cria o usuário admin (admin/admin)
+
+**Documentação completa:** [`docs/US03-INSTALL.md`](docs/US03-INSTALL.md)
+
+### Instalação Manual
+
+Se preferir executar os comandos manualmente:
+
+```bash
+lando start
+lando mysql -e "DROP DATABASE IF EXISTS drupal11; CREATE DATABASE drupal11;"
+lando composer install
+lando drush site:install standard --existing-config --account-name=admin --account-pass=admin -y
+```
+
+Acesse: https://drupal-enterprise-starter.lndo.site (usuário: `admin`, senha: `admin`)
 
 ## Comandos
 
